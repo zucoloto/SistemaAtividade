@@ -1,0 +1,75 @@
+<ui:composition template="/WEB-INF/template/Principal.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Pesquisar Grupo</ui:define>
+
+	<ui:define name="corpo">
+		<f:metadata>
+			<f:event listener="#{grupoPesquisarBean.init}" type="preRenderView" />
+		</f:metadata>
+
+		<h:form>
+			<h1>Pesquisar Grupo</h1>
+
+			<p:toolbar style="margin-top: 20px">
+				<p:toolbarGroup>
+					<p:commandButton value="Pesquisar"
+						action="#{grupoPesquisarBean.pesquisar}" update="@form" />
+				</p:toolbarGroup>
+
+				<p:toolbarGroup align="right">
+					<p:button value="Novo" outcome="/pages/grupos/CadastrarGrupo" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<p:panelGrid columns="2" id="painel"
+				style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo"
+				styleClass="panel-sem-bordas">
+
+				<p:outputLabel value="Nome" for="nome" />
+				<p:inputText id="nome" size="60" />
+			</p:panelGrid>
+
+			<p:dataTable id="grupoTable" value="#{grupoPesquisarBean.grupos}"
+				var="grupo" style="margin-top: 20px"
+				emptyMessage="Nenhum registro encontrado!" rows="20"
+				paginator="true" paginatorAlwaysVisible="false"
+				paginatorPosition="bottom">
+
+				<p:column headerText="Nome">
+					<h:outputText value="#{grupo.nomeGrupo}" />
+				</p:column>
+
+				<p:column headerText="Descrição">
+					<h:outputText value="#{grupo.descricao}" />
+				</p:column>
+
+				<p:column headerText="Ações"
+					style="text-align: center; width: 100px">
+
+					<p:button icon="ui-icon-pencil" title="Editar"
+						outcome="/pages/grupos/EditarGrupo">
+						<f:param name="grupo" value="#{grupo.id}" />
+					</p:button>
+
+					<p:commandButton icon="ui-icon-trash" title="Excluir"
+						oncomplete="PF('confirmacaoExclusao').show();" />
+				</p:column>
+			</p:dataTable>
+
+			<p:confirmDialog header="Exclusão de grupo"
+				message="Tem certeza que deseja excluir o grupo?"
+				widgetVar="confirmacaoExclusao">
+				<p:button value="Não" icon="ui-icon-close"
+					onclick="PF('confirmacaoExclusao').hide(); return false;" />
+				<p:commandButton value="Sim" icon="ui-icon-check"
+					oncomplete="PF('confirmacaoExclusao').hide();" />
+			</p:confirmDialog>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
