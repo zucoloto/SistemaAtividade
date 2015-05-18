@@ -19,20 +19,28 @@ CREATE TABLE fracao (
   fracao_pai_id BIGINT NULL,
   nome_fracao VARCHAR(100) NOT NULL,
   PRIMARY KEY(id),
-  INDEX fk_fracao_fracao_pai(fracao_pai_id)
+  INDEX fk_fracao_fracao_pai(fracao_pai_id),
+  FOREIGN KEY(fracao_pai_id)
+    REFERENCES fracao(id)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
 )
 TYPE=InnoDB;
 
 CREATE TABLE usuario (
   id BIGINT NOT NULL AUTO_INCREMENT,
   fracao_id BIGINT NOT NULL,
-  identidade VARCHAR(10) UNIQUE KEY,
+  identidade VARCHAR(10) UNIQUE KEY NOT NULL,
   nome_usuario VARCHAR(100) NOT NULL,
   email VARCHAR(255) UNIQUE KEY NOT NULL,
   status_usuario VARCHAR(20) NOT NULL,
   senha VARCHAR(10) NULL,
   PRIMARY KEY(id),
-  INDEX fk_usuario_fracao(fracao_id)
+  INDEX fk_usuario_fracao(fracao_id),
+  FOREIGN KEY(fracao_id)
+    REFERENCES fracao(id)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
 )
 TYPE=InnoDB;
 
@@ -41,7 +49,15 @@ CREATE TABLE usuario_grupo (
   grupo_id BIGINT NOT NULL,
   PRIMARY KEY(usuario_id, grupo_id),
   INDEX fk_usuario_grupo(usuario_id),
-  INDEX fk_grupo_usuario(grupo_id)
+  INDEX fk_grupo_usuario(grupo_id),
+  FOREIGN KEY(usuario_id)
+    REFERENCES usuario(id)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE,
+  FOREIGN KEY(grupo_id)
+    REFERENCES grupo(id)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
 )
 TYPE=InnoDB;
 
@@ -55,7 +71,15 @@ CREATE TABLE atividade (
   observacao TEXT NULL,
   PRIMARY KEY(id),
   INDEX fk_atividade_tipo(tipo_atividade_id),
-  INDEX fk_atividade_usuario(usuario_id)
+  INDEX fk_atividade_usuario(usuario_id),
+  FOREIGN KEY(tipo_atividade_id)
+    REFERENCES tipo_atividade(id)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE,
+  FOREIGN KEY(usuario_id)
+    REFERENCES usuario(id)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
 )
 TYPE=InnoDB;
 
