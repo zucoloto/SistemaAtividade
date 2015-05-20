@@ -10,7 +10,7 @@
 	<ui:define name="corpo">
 
 		<f:metadata>
-			<f:event listener="#{usuarioPesquisarBean.init}" type="preRenderView" />
+			<f:viewAction action="#{usuarioPesquisarBean.init}"/>
 		</f:metadata>
 
 		<h:form>
@@ -55,6 +55,7 @@
 						icon="ui-icon-pencil" title="Editar">
 						<f:param value="#{usuario.id}" name="usuario" />
 					</p:button>
+					
 				</p:column>
 
 			</p:dataTable>
