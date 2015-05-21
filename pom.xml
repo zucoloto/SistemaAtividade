@@ -6,9 +6,11 @@
 	<artifactId>SistemaAtividade</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>war</packaging>
+
 	<name>Sistema de Levantamento de Atividade</name>
 	<url>http://intranet.ccomsex.eb.mil.br/</url>
 	<description>Sistema de Levantamento de Atividade desenvolvido no CCOMSEx</description>
+
 	<organization>
 		<name>Exército Brasileiro</name>
 		<url>http://www.eb.mil.br</url>
@@ -36,6 +38,7 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<!-- JSTL -->
 		<dependency>
 			<groupId>jstl</groupId>
 			<artifactId>jstl</artifactId>
