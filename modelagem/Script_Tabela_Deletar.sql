@@ -1,5 +1,5 @@
-DROP TABLE IF EXISTS usuario_grupo;
-DROP TABLE IF EXISTS grupo;
-DROP TABLE IF EXISTS usuario;
-DROP TABLE IF EXISTS atividade;
-DROP TABLE IF EXISTS fracao;
+DROP TABLE IF EXISTS atv_usuario_grupo;
+DROP TABLE IF EXISTS atv_grupo;
+DROP TABLE IF EXISTS seg_usuario;
+DROP TABLE IF EXISTS atv_atividade;
+DROP TABLE IF EXISTS atv_fracao;
